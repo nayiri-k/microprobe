@@ -5,4 +5,4 @@ CC := $(TARGET)-gcc
 LD := $(CC)
 
 ENV_P = $(RISCVTOOLS)/riscv-tests/env/p
-ENV_V = $(RISCVTOOLS)/riscv-tests/env/p
+ENV_V = $(RISCVTOOLS)/riscv-tests/env/v
