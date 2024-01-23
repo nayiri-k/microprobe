@@ -134,7 +134,7 @@ class RiscvIpcTest(object):
                     self.target,
                     # Remove the endless parameter to not generate
                     # an endless loop
-                    cwrapper(endless=True),
+                    cwrapper(endless=False),
                     value=0b01010101,
                 )
                 passes = [

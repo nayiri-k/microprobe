@@ -73,7 +73,7 @@ def _generic_policy_wrapper(all_arguments):
 
         wrapper_name = "Avp"
         wrapper_class = _get_wrapper(wrapper_name)
-        wrapper = wrapper_class(reset=kwargs['reset'], endless=True)
+        wrapper = wrapper_class(reset=kwargs['reset'], endless=False)
         extension = "avp"
 
     elif target.name.endswith("ppc64_mesa"):
@@ -83,7 +83,7 @@ def _generic_policy_wrapper(all_arguments):
         wrapper = wrapper_class(outputname.replace("%INSTR%", bname).replace(
             "%EXT%", "tst"),
                                 reset=kwargs['reset'],
-                                endless=True)
+                                endless=False)
         extension = "tst"
 
     elif target.name.endswith("linux_gcc"):
@@ -97,21 +97,21 @@ def _generic_policy_wrapper(all_arguments):
 
         wrapper_name = "PoeSimple"
         wrapper_class = _get_wrapper(wrapper_name)
-        wrapper = wrapper_class(reset=kwargs['reset'], endless=True)
+        wrapper = wrapper_class(reset=kwargs['reset'], endless=False)
         extension = "bin"
 
     elif target.name.endswith("cronus"):
 
         wrapper_name = "Cronus"
         wrapper_class = _get_wrapper(wrapper_name)
-        wrapper = wrapper_class(reset=kwargs['reset'], endless=True)
+        wrapper = wrapper_class(reset=kwargs['reset'], endless=False)
         extension = "bin"
 
     elif target.name.endswith("test_p"):
 
         wrapper_name = "RiscvTestsP"
         wrapper_class = _get_wrapper(wrapper_name)
-        wrapper = wrapper_class(reset=kwargs['reset'], endless=True)
+        wrapper = wrapper_class(reset=kwargs['reset'], endless=False)
         extension = "S"
 
     else:
