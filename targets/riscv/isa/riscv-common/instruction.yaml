@@ -1462,6 +1462,15 @@
     funct5: ['0', 'funct5', '?']
     funct2: ['1', 'funct2', '?']
     funct3: ['0', 'funct3', '?']
+- Name: "NOP_V0"
+  Mnemonic: "ADDI"
+  Opcode: "13"
+  Format: "i"
+  Operands: # ADDI x0 x0 0
+    i_imm12: ['0', 'i_imm12', '?']  # 31:20, 0
+    rs1: ['X0', 'rs1', 'I']         # 19:15, X0
+    funct3: ['0', 'funct3', '?']    # 14:12, ADDI
+    rd: ['X0', 'rd', 'O']           # 11:7,  X0
 - Name: "OR_V0"
   Mnemonic: "OR"
   Opcode: "33"

@@ -68,17 +68,21 @@ def _generic_policy_wrapper(all_arguments: Tuple[List[InstructionType], str,
 
     instructions, outputdir, outputname, target, kwargs = all_arguments
 
-    outputfile = os.path.join(outputdir, "%DIRTREE%", outputname)
-    outputfile = outputfile.replace(
+    outputfile = os.path.join(outputdir, outputname)
+
+    if 'seq_output_file' not in kwargs:
+
+        outputfile = os.path.join(outputdir, "%DIRTREE%", outputname)
+        outputfile = outputfile.replace(
         "%DIRTREE%", os.path.join(*[instr.name for instr in instructions]))
 
-    if kwargs['shortnames']:
-        outputfile = outputfile.replace(
-            "%INSTR%", "mp_seq_%s" % hashlib.sha1("_".join(
-                instr.name for instr in instructions).encode()).hexdigest())
-    else:
-        outputfile = outputfile.replace(
-            "%INSTR%", "_".join(instr.name for instr in instructions))
+        if kwargs['shortnames']:
+            outputfile = outputfile.replace(
+                "%INSTR%", "mp_seq_%s" % hashlib.sha1("_".join(
+                    instr.name for instr in instructions).encode()).hexdigest())
+        else:
+            outputfile = outputfile.replace(
+                "%INSTR%", "_".join(instr.name for instr in instructions))
 
     extension = ""
     if target.name.endswith("linux_gcc"):
@@ -205,6 +209,14 @@ def main():
     groupname = "SEQ arguments"
     cmdline.add_group(groupname,
                       "Command arguments related to Sequence generation")
+    
+    cmdline.add_option("seq-output-file",
+                        "O",
+                        None,
+                        "Output file name",
+                        group=groupname,
+                        # opt_type=new_file,
+                        required=False)
 
     cmdline.add_option("seq-output-dir",
                        "D",
@@ -614,6 +626,9 @@ def _main(arguments):
         _DIRCONTENTS = set(findfiles([outputdir], ""))
 
     outputname = "%INSTR%.%EXT%"
+    
+    if 'seq_output_file' in arguments:
+        outputname = arguments['seq_output_file'] + ".%EXT%"
 
     if 'reset' not in arguments:
         arguments['reset'] = False
